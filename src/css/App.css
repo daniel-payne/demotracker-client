@@ -1,0 +1,98 @@
+.App {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.App .full-page {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  position: relative;
+}
+
+.App .full-page .fill-area {
+  height: calc(100% - 64px);
+  width: 100%;
+}
+
+.App .overflow-hidden {
+  overflow: hidden;
+}
+
+.Projection3D,
+.ProjectionFlat {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  /* border: 1px solid red; */
+  background-color: #303030;
+}
+
+.Projection3D .globe,
+.ProjectionFlat .globe {
+  fill: lightsteelblue;
+  pointer-events: none;
+}
+
+.Projection3D .land--selected,
+.ProjectionFlat .land--selected {
+  fill: gainsboro;
+  stroke: DarkSeaGreen;
+  stroke-width: 1px;
+  /* pointer-events: none; */
+}
+
+.Projection3D .land,
+.ProjectionFlat .land {
+  fill: gainsboro;
+  /* pointer-events: none; */
+}
+
+.Projection3D .guide,
+.ProjectionFlat .guide {
+  stroke: #3299bb;
+  pointer-events: none;
+}
+
+.Projection3D .guide-label,
+.ProjectionFlat .guide-label {
+  fill: #3299bb;
+  pointer-events: none;
+}
+
+.Projection3D .graticule,
+.ProjectionFlat .graticule {
+  fill: none;
+  stroke: #aaa;
+  stroke-width: 1px;
+  stroke-opacity: 0.5;
+  pointer-events: none;
+}
+
+.Projection3D .graticule-black,
+.ProjectionFlat .graticule-black {
+  fill: none;
+  stroke: #555;
+  stroke-width: 1px;
+  stroke-opacity: 0.5;
+}
+
+.Projection3D .cellestial-globe,
+.ProjectionFlat .cellestial-globe {
+  fill: #060061;
+  pointer-events: none;
+}
+
+.Projection3D .star,
+.ProjectionFlat .star {
+  fill: #fff;
+}
+
+.Projection3D .star-label,
+.ProjectionFlat .star-label {
+  text-transform: uppercase;
+  font-size: 10px;
+  fill: #fff;
+  fill-opacity: 0.6;
+}

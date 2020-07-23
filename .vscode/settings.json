@@ -1,0 +1,10 @@
+{
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    "files.associations": {
+        "*.js": "javascriptreact"
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    }
+}

@@ -1,0 +1,12 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "semi": [2, "never"],
+
+    "prettier/prettier": "error"
+  },
+  "plugins": ["prettier"],
+  "globals": {
+    "google": true
+  }
+}
