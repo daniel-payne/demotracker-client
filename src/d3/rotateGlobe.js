@@ -7,7 +7,7 @@ const rotateGlobe = (svg, projection, path) => {
     horizontalTilt: 0,
   }
 
-  d3.timer(function (elapsed) {
+  const timer = d3.timer(function (elapsed) {
     projection.rotate([
       -1 * (config.speed * elapsed - 500),
       config.verticalTilt,
@@ -15,6 +15,8 @@ const rotateGlobe = (svg, projection, path) => {
     ])
     svg.selectAll('path').attr('d', path)
   })
+
+  return timer
 }
 
 export default rotateGlobe

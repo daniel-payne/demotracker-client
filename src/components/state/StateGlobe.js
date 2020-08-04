@@ -25,7 +25,7 @@ const CountryGlobe = (props) => {
 
   return (
     <React.Fragment>
-      <Projection3D {...props} onSelection={handleSelection} />
+      <Projection3D {...props} onSelection={handleSelection} smallMarkers={true} />
     </React.Fragment>
   )
 }

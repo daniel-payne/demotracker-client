@@ -3,16 +3,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import renderGlobe from 'd3/renderGlobe'
 
 const Projection3D = (props) => {
-  const {
-    countries,
-    markers,
-    selectedCountry,
-    selectedState,
-    selectedCity,
-    onSelection,
-    smallMarkers,
-    enableRotation,
-  } = props
+  const { selectedCountry } = props
 
   const targetSVG = useRef(null)
 
@@ -32,21 +23,20 @@ const Projection3D = (props) => {
     const states = selectedCountry ? selectedCountry.states : undefined
     const cities = selectedCountry ? selectedCountry.cities : undefined
 
-    renderGlobe({
+    const newTimer = renderGlobe({
       targetSVG: targetSVG.current,
       height,
       width,
-      onSelection,
-      countries,
-      markers,
       states,
       cities,
-      selectedCountry,
-      selectedState,
-      selectedCity,
-      smallMarkers,
-      enableRotation,
+      ...props,
     })
+
+    return () => {
+      if (newTimer) {
+        newTimer.stop()
+      }
+    }
   })
 
   return (
@@ -58,6 +48,7 @@ const Projection3D = (props) => {
       <g id="map-display-cities" />
 
       <g id="map-display-markers" />
+      <g id="map-display-events" />
     </svg>
   )
 }

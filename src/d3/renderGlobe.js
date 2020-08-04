@@ -8,6 +8,7 @@ import drawStates from 'd3/drawStates'
 import drawCities from 'd3/drawCities'
 
 import drawMarkers from 'd3/drawMarkers'
+import drawEvents from 'd3/drawEvents'
 
 import fadeOut from 'd3/fadeOut'
 import removePaths from 'd3/removePaths'
@@ -34,7 +35,7 @@ const renderGlobe = ({
   smallMarkers,
   enableRotation,
 }) => {
-  const selection = selectedCity || selectedState || selectedCountry
+  const selected = selectedCity || selectedState || selectedCountry
 
   const svg = d3.select(targetSVG)
 
@@ -48,7 +49,9 @@ const renderGlobe = ({
 
   const path = d3.geoPath().projection(projection)
 
-  recenterGlobe(selection, width, height, projection, SCALING_FACTOR)
+  let timer
+
+  recenterGlobe(selected, width, height, projection, SCALING_FACTOR)
 
   removePaths(svg)
 
@@ -62,13 +65,17 @@ const renderGlobe = ({
 
   drawMarkers(svg, path, markers, smallMarkers)
 
+  drawEvents(svg, projection, selected, smallMarkers)
+
   fadeOut(svg, markers, states)
 
   manageGlobe(svg, projection, path)
 
   if (enableRotation === true) {
-    rotateGlobe(svg, projection, path)
+    timer = rotateGlobe(svg, projection, path)
   }
+
+  return timer
 }
 
 export default renderGlobe

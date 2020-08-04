@@ -49,10 +49,10 @@ const WorldPage = () => {
     setRotation(nextRotation)
   }
 
-  const names = ' full-page overflow-hidden'
+  const overflowClass = show === 'MAP' || show === 'GLOBE' ? 'overflow-hidden' : ''
 
   return (
-    <Box className={'WorldPage' + names}>
+    <Box className={'WorldPage full-page ' + overflowClass}>
       {show === 'GLOBE' && (
         <div style={{ position: 'absolute', bottom: 24, right: 24 }}>
           <Button onClick={handleRotation}>Rotate {enableRotation}</Button>
