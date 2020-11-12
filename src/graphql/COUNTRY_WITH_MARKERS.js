@@ -2,42 +2,35 @@ import { gql } from 'apollo-boost'
 
 const COUNTRY_WITH_MARKERS = gql`
   query COUNTRY_WITH_MARKERS($countryId: ID) {
-    countries {
-      id
-      name
-      iso3Code
-      iso2Code
-      outline: geoJson
-    }
-
-    country(id: $countryId) {
-      id
-      name
-
-      outline: geoJson
-
-      markers(area: TEN_SQUARE_KILOMETERS) {
-        id
-        latitude
-        longitude
-        eventCount
-      }
-
-      states {
+    reference {
+      countries {
         id
         name
-        hascCode
-        eventCount
-
+        iso3Code
+        iso2Code
         outline: geoJson
       }
 
-      cities {
+      country(id: $countryId) {
         id
         name
-        eventCount
 
         outline: geoJson
+
+        states {
+          id
+          name
+          hascCode
+
+          outline: geoJson
+        }
+
+        cities {
+          id
+          name
+
+          outline: geoJson
+        }
       }
     }
   }

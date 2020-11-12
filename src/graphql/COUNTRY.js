@@ -2,33 +2,35 @@ import { gql } from 'apollo-boost'
 
 const COUNTRY = gql`
   query COUNTRY($countryId: ID) {
-    countries {
-      id
-      name
-      iso3Code
-      iso2Code
-      outline: geoJson
-    }
-
-    country(id: $countryId) {
-      id
-      name
-
-      outline: geoJson
-
-      states {
+    reference {
+      countries {
         id
         name
-        hascCode
-
+        iso3Code
+        iso2Code
         outline: geoJson
       }
 
-      cities {
+      country(id: $countryId) {
         id
         name
 
         outline: geoJson
+
+        states {
+          id
+          name
+          hascCode
+
+          outline: geoJson
+        }
+
+        cities {
+          id
+          name
+
+          outline: geoJson
+        }
       }
     }
   }

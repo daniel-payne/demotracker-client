@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { gql } from 'apollo-boost'
+import { useApolloClient } from '@apollo/react-hooks'
 
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -77,6 +79,35 @@ const PageNavigation = (props) => {
     setOpen(false)
   }
 
+  const LOGIN = gql`
+    mutation LOGIN {
+      login(username: "daniel.payne@keldan.co.uk", password: "hellorain") {
+        id
+        role
+        session
+      }
+    }
+  `
+
+  const USER = gql`
+    query USER {
+      viewer {
+        id
+        role
+      }
+    }
+  `
+
+  const client = useApolloClient()
+
+  const handleClickConnect = () => {
+    client.mutate({ mutation: LOGIN }).then((result) => console.log(result))
+  }
+
+  const handleClickUser = () => {
+    client.query({ query: USER }).then((result) => console.log(result))
+  }
+
   return (
     <AppBar position="sticky">
       <Toolbar>
@@ -87,6 +118,8 @@ const PageNavigation = (props) => {
         >
           World
         </Typography>
+        <Button onClick={handleClickConnect}>Connect</Button>{' '}
+        <Button onClick={handleClickUser}>User</Button>
         {country && (
           <Typography
             className={isCountryFocused ? classes.focused : classes.goto}
