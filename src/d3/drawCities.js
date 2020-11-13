@@ -39,17 +39,17 @@ const drawCities = (svg, path, cities, selectedCity, onSelection) => {
   svg
     .select('#map-display-cities')
     .selectAll('path')
-    .on('mouseover', function (d) {
+    .on('mouseover', function (event, d) {
       if (!selectedCity || selectedCity.id !== d.properties.id) {
         d3.select(this).style('fill', 'SaddleBrown')
       }
     })
-    .on('mouseout', function (d) {
+    .on('mouseout', function (event, d) {
       d3.select(this).style('fill', 'Peru')
     })
     // .attr('pointer-events', 'none')
-    .on('dblclick', function (d) {
-      d3.event.stopPropagation()
+    .on('dblclick', function (event, d) {
+      // d3.event.stopPropagation()
       if (onSelection) {
         onSelection({ type: 'CITY', id: d.properties.id })
       }

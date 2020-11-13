@@ -39,16 +39,16 @@ const drawCountries = (svg, path, countries, selectedCountry, onSelection) => {
   svg
     .select('#map-display-countries')
     .selectAll('path')
-    .on('mouseover', function (d) {
+    .on('mouseover', function (event, d) {
       if (!selectedCountry || selectedCountry.id !== d.properties.id) {
         d3.select(this).style('fill', 'DarkSeaGreen')
       }
     })
-    .on('mouseout', function (d) {
+    .on('mouseout', function (event, d) {
       d3.select(this).style('fill', 'gainsboro')
     })
-    .on('dblclick', function (d) {
-      d3.event.stopPropagation()
+    .on('dblclick', function (event, d) {
+      // d3.event.stopPropagation()
       if (onSelection) {
         onSelection({ type: 'COUNTRY', id: d.properties.id, iso2Code: d.properties.iso2Code })
       }

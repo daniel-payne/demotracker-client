@@ -2,7 +2,7 @@ import { gql } from 'apollo-boost'
 
 const WORLD = gql`
   query WORLD {
-    reference{
+    reference {
       countries {
         id
         name

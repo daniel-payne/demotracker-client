@@ -25,23 +25,30 @@ const drawStates = (svg, path, states, selectedState, onSelection) => {
     .selectAll('path')
     .data(data, (d) => d.properties.id)
 
-  selection.enter().append('path').attr('class', 'state').attr('fill', 'gainsboro').attr('stroke', 'DarkSeaGreen').attr('stroke-width', '1px').attr('d', path)
+  selection
+    .enter()
+    .append('path')
+    .attr('class', 'state')
+    .attr('fill', 'gainsboro')
+    .attr('stroke', 'DarkSeaGreen')
+    .attr('stroke-width', '1px')
+    .attr('d', path)
 
   selection.exit().remove()
 
   svg
     .select('#map-display-states')
     .selectAll('path')
-    .on('mouseover', function (d) {
+    .on('mouseover', function (event, d) {
       if (!selectedState || selectedState.id !== d.properties.id) {
         d3.select(this).style('fill', 'DarkSeaGreen')
       }
     })
-    .on('mouseout', function (d) {
+    .on('mouseout', function (event, d) {
       d3.select(this).style('fill', 'gainsboro')
     })
-    .on('dblclick', function (d) {
-      d3.event.stopPropagation()
+    .on('dblclick', function (event, d) {
+      // d3.event.stopPropagation()
 
       if (onSelection) {
         onSelection({ type: 'STATE', id: d.properties.id, iso2Code: d.properties.iso2Code })

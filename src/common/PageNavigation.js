@@ -89,23 +89,35 @@ const PageNavigation = (props) => {
     }
   `
 
-  const USER = gql`
-    query USER {
-      viewer {
+  const LOGOUT = gql`
+    mutation LOGOUT {
+      logout {
         id
         role
+        session
       }
     }
   `
 
+  // const USER = gql`
+  //   query USER {
+  //     viewer {
+  //       id
+  //       role
+  //     }
+  //   }
+  // `
+
   const client = useApolloClient()
 
-  const handleClickConnect = () => {
-    client.mutate({ mutation: LOGIN }).then((result) => console.log(result))
+  const handleClickConnect = async () => {
+    await client.mutate({ mutation: LOGIN }).then((result) => console.log(result))
+    await client.resetStore()
   }
 
-  const handleClickUser = () => {
-    client.query({ query: USER }).then((result) => console.log(result))
+  const handleClickDisconnect = async () => {
+    await client.mutate({ mutation: LOGOUT }).then((result) => console.log(result))
+    await client.resetStore()
   }
 
   return (
@@ -119,7 +131,7 @@ const PageNavigation = (props) => {
           World
         </Typography>
         <Button onClick={handleClickConnect}>Connect</Button>{' '}
-        <Button onClick={handleClickUser}>User</Button>
+        <Button onClick={handleClickDisconnect}>Disconnect</Button>
         {country && (
           <Typography
             className={isCountryFocused ? classes.focused : classes.goto}
