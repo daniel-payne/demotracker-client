@@ -32,12 +32,26 @@ const CountryPage = () => {
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :( </p>
 
-  const countries = data.countries
-  const country = data.country
+  const { viewer, reference } = data
+
+  const { countryMarkers, countryCounts } = viewer || {}
+  const { countries, country } = reference
 
   const states = country.states || []
   const cities = country.cities || []
-  const markers = country.markers || []
+
+  if (countryCounts) {
+    for (const count of countryCounts) {
+      const state = states.find((item) => item.id === count.id)
+      const city = cities.find((item) => item.id === count.id)
+
+      if (state) {
+        state.eventCount = count.eventCount
+      } else if (city) {
+        city.eventCount = count.eventCount
+      }
+    }
+  }
 
   let display
 
@@ -48,7 +62,7 @@ const CountryPage = () => {
         selectedCountry={country}
         states={states}
         cities={cities}
-        markers={markers}
+        markers={countryMarkers}
       />
     )
   } else if (show === 'GLOBE') {
@@ -58,7 +72,7 @@ const CountryPage = () => {
         selectedCountry={country}
         states={states}
         cities={cities}
-        markers={markers}
+        markers={countryMarkers}
       />
     )
   } else {

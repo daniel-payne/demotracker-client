@@ -2,6 +2,22 @@ import { gql } from 'apollo-boost'
 
 const COUNTRY_WITH_MARKERS = gql`
   query COUNTRY_WITH_MARKERS($countryId: ID) {
+    viewer {
+      id
+      role
+
+      countryCounts(id: $countryId) {
+        id
+        eventCount
+      }
+
+      countryMarkers(id: $countryId) {
+        id
+        latitude
+        longitude
+        eventCount
+      }
+    }
     reference {
       countries {
         id
