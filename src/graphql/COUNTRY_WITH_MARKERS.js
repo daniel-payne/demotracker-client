@@ -18,6 +18,7 @@ const COUNTRY_WITH_MARKERS = gql`
         eventCount
       }
     }
+
     reference {
       countries {
         id

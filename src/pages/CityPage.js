@@ -10,8 +10,8 @@ import CityData from 'components/city/CityData'
 import CityMap from 'components/city/CityMap'
 import CityGlobe from 'components/city/CityGlobe'
 
-import useQueryShow from 'hooks/useQueryShow'
-import useQueryOverlay from 'hooks/useQueryOverlay'
+import useParamsShow from 'hooks/useParamsShow'
+import useParamsOverlay from 'hooks/useParamsOverlay'
 
 import PageNavigation from 'common/PageNavigation'
 
@@ -51,8 +51,8 @@ const CITY = gql`
 const CityPage = () => {
   const { countryId, cityId } = useParams()
 
-  const show = useQueryShow()
-  const overlay = useQueryOverlay()
+  const show = useParamsShow()
+  const overlay = useParamsOverlay()
 
   const { loading, error, data } = useQuery(CITY, {
     variables: { countryId, cityId },

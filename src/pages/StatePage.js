@@ -9,8 +9,8 @@ import StateData from 'components/state/StateData'
 import StateMap from 'components/state/StateMap'
 import StateGlobe from 'components/state/StateGlobe'
 
-import useQueryShow from 'hooks/useQueryShow'
-import useQueryOverlay from 'hooks/useQueryOverlay'
+import useParamsShow from 'hooks/useParamsShow'
+import useParamsOverlay from 'hooks/useParamsOverlay'
 
 import PageNavigation from 'common/PageNavigation'
 
@@ -20,8 +20,8 @@ import STATE_WITH_EVENTS from 'graphql/STATE_WITH_EVENTS'
 const StatePage = () => {
   const { countryId, stateId } = useParams()
 
-  const show = useQueryShow()
-  const overlay = useQueryOverlay()
+  const show = useParamsShow()
+  const overlay = useParamsOverlay()
 
   const query = overlay === 'TERRORISM' ? STATE_WITH_EVENTS : STATE
 

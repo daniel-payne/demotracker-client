@@ -1,13 +1,13 @@
 import { useHistory } from 'react-router-dom'
 
-import useQueryShow from 'hooks/useQueryShow'
-import useQueryOverlay from 'hooks/useQueryOverlay'
+import useParamsShow from 'hooks/useParamsShow'
+import useParamsOverlay from 'hooks/useParamsOverlay'
 
 const useLocation = () => {
   const history = useHistory()
 
-  const show = useQueryShow()
-  const overlay = useQueryOverlay()
+  const show = useParamsShow()
+  const overlay = useParamsOverlay()
 
   const location = history.location.pathname + history.location.search
 

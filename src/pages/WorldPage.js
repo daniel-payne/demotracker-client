@@ -11,8 +11,8 @@ import WorldData from 'components/world/WorldData'
 
 import PageNavigation from 'common/PageNavigation'
 
-import useQueryShow from 'hooks/useQueryShow'
-import useQueryOverlay from 'hooks/useQueryOverlay'
+import useParamsShow from 'hooks/useParamsShow'
+import useParamsOverlay from 'hooks/useParamsOverlay'
 
 import WORLD from 'graphql/WORLD'
 import WORLD_WITH_DATA from 'graphql/WORLD_WITH_DATA'
@@ -22,8 +22,8 @@ import 'css/WorldPage.css'
 const WorldPage = () => {
   const [enableRotation, setRotation] = useState(false)
 
-  const show = useQueryShow()
-  const overlay = useQueryOverlay()
+  const show = useParamsShow()
+  const overlay = useParamsOverlay()
 
   const query = overlay === 'TERRORISM' ? WORLD_WITH_DATA : WORLD
 

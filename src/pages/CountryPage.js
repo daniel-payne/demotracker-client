@@ -11,8 +11,8 @@ import CountryData from 'components/country/CountryData'
 import CountryMap from 'components/country/CountryMap'
 import CountryGlobe from 'components/country/CountryGlobe'
 
-import useQueryShow from 'hooks/useQueryShow'
-import useQueryOverlay from 'hooks/useQueryOverlay'
+import useParamsShow from 'hooks/useParamsShow'
+import useParamsOverlay from 'hooks/useParamsOverlay'
 
 import COUNTRY from 'graphql/COUNTRY'
 import COUNTRY_WITH_MARKERS from 'graphql/COUNTRY_WITH_MARKERS'
@@ -20,8 +20,8 @@ import COUNTRY_WITH_MARKERS from 'graphql/COUNTRY_WITH_MARKERS'
 const CountryPage = () => {
   const { countryId } = useParams()
 
-  const show = useQueryShow()
-  const overlay = useQueryOverlay()
+  const show = useParamsShow()
+  const overlay = useParamsOverlay()
 
   const query = overlay === 'TERRORISM' ? COUNTRY_WITH_MARKERS : COUNTRY
 
