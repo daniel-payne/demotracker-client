@@ -32,13 +32,15 @@ const StatePage = () => {
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :( </p>
 
-  const countries = data.countries
-  const states = data.country.states
+  const { viewer, reference } = data
 
-  const country = data.country
-  const state = country.state
+  const { events } = viewer || {}
+  const { country, countries } = reference
 
-  let display = <StateData state={state} />
+  const { states } = countries
+  const { state } = country
+
+  let display = <StateData state={state} events={events} />
 
   if (show === 'MAP') {
     display = (
@@ -47,6 +49,7 @@ const StatePage = () => {
         selectedCountry={country}
         selectedState={state}
         states={states}
+        markers={events}
       />
     )
   } else if (show === 'GLOBE') {
@@ -56,6 +59,7 @@ const StatePage = () => {
         selectedCountry={country}
         selectedState={state}
         states={states}
+        markers={events}
       />
     )
   }

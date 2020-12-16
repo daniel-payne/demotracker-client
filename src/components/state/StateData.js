@@ -3,8 +3,7 @@ import React from 'react'
 import EventDetails from 'components/event/EventDetails'
 
 const StateData = (props) => {
-  const { state } = props
-  const { events } = state
+  const { events } = props
 
   return (
     <div className="StateData">

@@ -2,54 +2,61 @@ import { gql } from 'apollo-boost'
 
 const STATE_WITH_EVENTS = gql`
   query STATE_WITH_EVENTS($countryId: ID, $stateId: ID) {
-    countries {
+    viewer {
       id
-      name
-      iso3Code
-      iso2Code
-      outline: geoJson
+      role
+
+      events: stateEvents(id: $stateId) {
+        id
+        date
+        latitude
+        longitude
+        summary
+        perpetrator
+        numberKilled
+        numberWounded
+        attackType
+        attackSubType
+        targetType
+        targetSubType
+        primaryWeaponType
+        primaryWeaponSubType
+        secondaryWeaponType
+        secondaryWeaponSubType
+        tertiaryWeaponType
+        tertiaryWeaponSubType
+      }
     }
 
-    country(id: $countryId) {
-      id
-      name
-
-      outline: geoJson
-
-      states {
+    reference {
+      countries {
         id
         name
-        hascCode
-
+        iso3Code
+        iso2Code
         outline: geoJson
       }
 
-      state(id: $stateId) {
+      country(id: $countryId) {
         id
         name
-        hascCode
 
         outline: geoJson
 
-        events {
+        states {
           id
-          date
-          latitude
-          longitude
-          summary
-          perpetrator
-          numberKilled
-          numberWounded
-          attackType
-          attackSubType
-          targetType
-          targetSubType
-          primaryWeaponType
-          primaryWeaponSubType
-          secondaryWeaponType
-          secondaryWeaponSubType
-          tertiaryWeaponType
-          tertiaryWeaponSubType
+          name
+          hascCode
+
+          outline: geoJson
+        }
+
+        state(id: $stateId) {
+          id
+          name
+          hascCode
+
+          outline: geoJson
         }
       }
     }

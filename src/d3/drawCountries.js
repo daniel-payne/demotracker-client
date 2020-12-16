@@ -60,7 +60,7 @@ const drawCountries = (svg, path, countries, selectedCountry, onSelection) => {
       .selectAll('path')
       .attr('opacity', function (d) {
         if (selectedCountry.id === d.properties.id) {
-          return 0.0
+          return 0.1
         }
         return 0.25
       })
