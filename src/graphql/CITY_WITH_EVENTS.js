@@ -1,12 +1,12 @@
 import { gql } from 'apollo-boost'
 
-const STATE_WITH_EVENTS = gql`
-  query STATE_WITH_EVENTS($countryId: ID, $stateId: ID) {
+const CITY_WITH_EVENTS = gql`
+  query CITY_WITH_EVENTS($countryId: ID, $cityId: ID) {
     viewer {
       id
       role
 
-      events: stateEvents(id: $stateId) {
+      events: cityEvents(id: $cityId) {
         id
         date
         latitude
@@ -38,8 +38,7 @@ const STATE_WITH_EVENTS = gql`
       countries {
         id
         name
-        iso3Code
-        iso2Code
+
         outline
       }
 
@@ -49,18 +48,9 @@ const STATE_WITH_EVENTS = gql`
 
         outline
 
-        states {
+        city(id: $cityId) {
           id
           name
-          hascCode
-
-          outline
-        }
-
-        state(id: $stateId) {
-          id
-          name
-          hascCode
 
           outline
         }
@@ -69,4 +59,4 @@ const STATE_WITH_EVENTS = gql`
   }
 `
 
-export default STATE_WITH_EVENTS
+export default CITY_WITH_EVENTS

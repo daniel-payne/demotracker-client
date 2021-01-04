@@ -19,13 +19,13 @@ const WORLD_WITH_DATA = gql`
       }
     }
 
-    reference {
+    information {
       countries {
         id
         name
         iso3Code
         iso2Code
-        outline: geoJson
+        outline
       }
     }
   }

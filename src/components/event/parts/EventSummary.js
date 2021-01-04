@@ -5,11 +5,11 @@ import Typography from '@material-ui/core/Typography'
 
 const EventSummary = (props) => {
   const { event } = props
-  const { summary } = event
+  const { additionalNotes } = event
 
   return (
     <Box pb={1}>
-      <Typography variant="body2">{summary}</Typography>
+      <Typography variant="body2">{additionalNotes}</Typography>
     </Box>
   )
 }

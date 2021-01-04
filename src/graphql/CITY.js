@@ -1,13 +1,12 @@
 import { gql } from 'apollo-boost'
 
-const STATE = gql`
-  query STATE($countryId: ID, $stateId: ID) {
+const CITY = gql`
+  query CITY($countryId: ID, $cityId: ID) {
     information {
       countries {
         id
         name
-        iso3Code
-        iso2Code
+
         outline
       }
 
@@ -17,18 +16,9 @@ const STATE = gql`
 
         outline
 
-        states {
+        city(id: $cityId) {
           id
           name
-          hascCode
-
-          outline
-        }
-
-        state(id: $stateId) {
-          id
-          name
-          hascCode
 
           outline
         }
@@ -37,4 +27,4 @@ const STATE = gql`
   }
 `
 
-export default STATE
+export default CITY

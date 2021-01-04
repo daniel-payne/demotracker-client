@@ -19,34 +19,34 @@ const COUNTRY_WITH_MARKERS = gql`
       }
     }
 
-    reference {
+    information {
       countries {
         id
         name
         iso3Code
         iso2Code
-        outline: geoJson
+        outline
       }
 
       country(id: $countryId) {
         id
         name
 
-        outline: geoJson
+        outline
 
         states {
           id
           name
           hascCode
 
-          outline: geoJson
+          outline
         }
 
         cities {
           id
           name
 
-          outline: geoJson
+          outline
         }
       }
     }

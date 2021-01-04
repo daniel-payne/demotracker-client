@@ -5,6 +5,7 @@ import { ApolloProvider } from '@apollo/react-hooks'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 
+import TestPage from 'pages/TestPage'
 import WorldPage from 'pages/WorldPage'
 import CountryPage from 'pages/CountryPage'
 import StatePage from 'pages/StatePage'
@@ -35,6 +36,9 @@ function App() {
             </Route>
             <Route path="/world">
               <WorldPage />
+            </Route>
+            <Route path="/test">
+              <TestPage />
             </Route>
             <Route path="/">
               <WorldPage />

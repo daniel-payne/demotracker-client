@@ -1,6 +1,5 @@
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
 import { useParams } from 'react-router-dom'
 
 import Box from '@material-ui/core/Box'
@@ -15,38 +14,8 @@ import useParamsOverlay from 'hooks/useParamsOverlay'
 
 import PageNavigation from 'common/PageNavigation'
 
-const CITY = gql`
-  query selectedCity($countryId: ID, $cityId: ID) {
-    countries {
-      id
-      name
-      iso3Code
-      iso2Code
-      outline: geoJson
-    }
-
-    country(id: $countryId) {
-      id
-      name
-
-      outline: geoJson
-
-      cities {
-        id
-        name
-
-        outline: geoJson
-      }
-
-      city(id: $cityId) {
-        id
-        name
-
-        outline: geoJson
-      }
-    }
-  }
-`
+import CITY from 'graphql/CITY'
+import CITY_WITH_EVENTS from 'graphql/CITY_WITH_EVENTS'
 
 const CityPage = () => {
   const { countryId, cityId } = useParams()
@@ -54,20 +23,24 @@ const CityPage = () => {
   const show = useParamsShow()
   const overlay = useParamsOverlay()
 
-  const { loading, error, data } = useQuery(CITY, {
+  const query = overlay === 'TERRORISM' ? CITY_WITH_EVENTS : CITY
+
+  const { loading, error, data } = useQuery(query, {
     variables: { countryId, cityId },
   })
 
   if (loading) return <p>Loading...</p>
-  if (error) return <p>Error :( </p>
+  if (error) return <pre>{JSON.stringify(error, null, 2)} </pre>
 
-  const countries = data.countries
-  const cities = data.country.cities
+  const { viewer, information } = data
 
-  const country = data.country
-  const city = country.city
+  const { events } = viewer || {}
+  const { country, countries } = information
 
-  let display = <CityData city={city} />
+  const { cities } = countries
+  const { city } = country
+
+  let display = <CityData city={city} events={events} />
 
   if (show === 'MAP') {
     display = (
@@ -76,6 +49,7 @@ const CityPage = () => {
         selectedCountry={country}
         selectedCity={city}
         cities={cities}
+        markers={events}
       />
     )
   } else if (show === 'GLOBE') {
@@ -85,6 +59,7 @@ const CityPage = () => {
         selectedCountry={country}
         selectedCity={city}
         cities={cities}
+        markers={events}
       />
     )
   }
@@ -92,7 +67,7 @@ const CityPage = () => {
   return (
     <Box className="CityPage full-page">
       <PageNavigation show={show} overlay={overlay} country={country} city={city} />
-      <Container maxWidth={false} disableGutters>
+      <Container className="fill-area" maxWidth={false} disableGutters>
         {display}
       </Container>
     </Box>

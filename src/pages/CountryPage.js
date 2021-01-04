@@ -32,10 +32,10 @@ const CountryPage = () => {
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :( </p>
 
-  const { viewer, reference } = data
+  const { viewer, information } = data
 
   const { countryMarkers, countryCounts } = viewer || {}
-  const { countries, country } = reference
+  const { countries, country } = information
 
   const states = country.states || []
   const cities = country.cities || []

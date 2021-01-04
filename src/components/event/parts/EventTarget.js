@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography'
 
 const EventTarget = (props) => {
   const { event } = props
-  const { targetType, targetSubType } = event
+  const { targetType, targetDetails } = event
 
   return (
     <Box pb={1}>
@@ -16,7 +16,7 @@ const EventTarget = (props) => {
         <span>{targetType}</span>
       </Typography>
       <Typography variant="caption" display="inline">
-        <span> {targetSubType}</span>
+        <span> {targetDetails}</span>
       </Typography>
     </Box>
   )

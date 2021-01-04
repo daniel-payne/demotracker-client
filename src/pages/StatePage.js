@@ -30,12 +30,12 @@ const StatePage = () => {
   })
 
   if (loading) return <p>Loading...</p>
-  if (error) return <p>Error :( </p>
+  if (error) return <pre>{JSON.stringify(error, null, 2)} </pre>
 
-  const { viewer, reference } = data
+  const { viewer, information } = data
 
   const { events } = viewer || {}
-  const { country, countries } = reference
+  const { country, countries } = information
 
   const { states } = countries
   const { state } = country

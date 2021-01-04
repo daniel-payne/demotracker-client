@@ -32,9 +32,9 @@ const WorldPage = () => {
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :( {error.message}</p>
 
-  const { viewer, reference } = data
+  const { viewer, information } = data
   const { globalMarkers, globalCounts } = viewer || {}
-  const { countries } = reference
+  const { countries } = information
 
   if (globalCounts) {
     for (const count of globalCounts) {
