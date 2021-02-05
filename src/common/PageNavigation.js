@@ -6,12 +6,18 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
+
 import Box from '@material-ui/core/Box'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
+
+import LockOpenIcon from '@material-ui/icons/LockOpen'
+import SearchIcon from '@material-ui/icons/Search'
 
 import useLocation from 'hooks/useLocation'
 
 import PlaceModal from 'pages/PlaceModal'
+import LoginModal from 'pages/LoginModal'
 
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -36,7 +42,8 @@ const PageNavigation = (props) => {
   const setLocation = useLocation()[1]
   const classes = useStyles()
 
-  const [isOpen, setOpen] = useState(false)
+  const [isSearchOpen, setSearchOpen] = useState(false)
+  const [isLoginOpen, setLoginOpen] = useState(false)
 
   const isWorldFocused = country === undefined
   const isCountryFocused = country !== undefined && state === undefined && city === undefined
@@ -72,11 +79,15 @@ const PageNavigation = (props) => {
   const handleClickOverlayTerrorism = () => handleClickOverlay('TERRORISM')
 
   const handleClickFind = () => {
-    setOpen(true)
+    setSearchOpen(true)
   }
 
-  const handleClose = () => {
-    setOpen(false)
+  const handleSearchClose = () => {
+    setSearchOpen(false)
+  }
+
+  const handleLoginClose = () => {
+    setLoginOpen(false)
   }
 
   const LOGIN = gql`
@@ -111,8 +122,9 @@ const PageNavigation = (props) => {
   const client = useApolloClient()
 
   const handleClickConnect = async () => {
-    await client.mutate({ mutation: LOGIN }).then((result) => console.log(result))
-    await client.resetStore()
+    // await client.mutate({ mutation: LOGIN }).then((result) => console.log(result))
+    // await client.resetStore()
+    setLoginOpen(true)
   }
 
   const handleClickDisconnect = async () => {
@@ -123,6 +135,9 @@ const PageNavigation = (props) => {
   return (
     <AppBar position="sticky">
       <Toolbar>
+        <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleClickFind}>
+          <SearchIcon />
+        </IconButton>
         <Typography
           className={isWorldFocused ? classes.focused : classes.goto}
           variant="h6"
@@ -130,8 +145,6 @@ const PageNavigation = (props) => {
         >
           World
         </Typography>
-        <Button onClick={handleClickConnect}>Connect</Button>{' '}
-        <Button onClick={handleClickDisconnect}>Disconnect</Button>
         {country && (
           <Typography
             className={isCountryFocused ? classes.focused : classes.goto}
@@ -178,11 +191,14 @@ const PageNavigation = (props) => {
             Terrorism
           </Button>
         </ButtonGroup>
-        <Button variant="contained" color="primary" disableElevation onClick={handleClickFind}>
-          Find Place
-        </Button>
+        {/* <Button onClick={handleClickConnect}>Login</Button>
+        <Button onClick={handleClickDisconnect}>Logout</Button> */}
+        <IconButton edge="end" color="inherit" aria-label="menu" onClick={handleClickConnect}>
+          <LockOpenIcon />
+        </IconButton>
       </Toolbar>
-      <PlaceModal open={isOpen} onClose={handleClose} />
+      <PlaceModal open={isSearchOpen} onClose={handleSearchClose} />
+      <LoginModal open={isLoginOpen} onClose={handleLoginClose} />
     </AppBar>
   )
 }
