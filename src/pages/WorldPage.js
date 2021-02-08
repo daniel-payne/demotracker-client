@@ -72,7 +72,7 @@ const WorldPage = () => {
           <Button onClick={handleRotation}>Rotate {enableRotation}</Button>
         </div>
       )}
-      <PageNavigation show={show} overlay={overlay} />
+      <PageNavigation show={show} overlay={overlay} viewer={viewer} />
       <Container className="fill-area" maxWidth={false} disableGutters>
         {display}
       </Container>

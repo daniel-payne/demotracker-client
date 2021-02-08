@@ -2,13 +2,9 @@ import React, { useState } from 'react'
 import { gql } from 'apollo-boost'
 import { useApolloClient } from '@apollo/react-hooks'
 
-import useLocation from 'hooks/useLocation'
-
 import Box from '@material-ui/core/Box'
 import Dialog from '@material-ui/core/Dialog'
-import ListItemText from '@material-ui/core/ListItemText'
-import ListItem from '@material-ui/core/ListItem'
-import List from '@material-ui/core/List'
+
 import Button from '@material-ui/core/Button'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -57,7 +53,7 @@ const LoginModal = (props) => {
 
   const handleClickConnect = async () => {
     await client
-      .mutate({ mutation: LOGIN, query: { username, password } })
+      .mutate({ mutation: LOGIN, variables: { username, password } })
       .then((result) => console.log(result))
     await client.resetStore()
 

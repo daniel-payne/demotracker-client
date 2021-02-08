@@ -2,6 +2,10 @@ import { gql } from 'apollo-boost'
 
 const STATE = gql`
   query STATE($countryId: ID, $stateId: ID) {
+    viewer {
+      id
+      role
+    }
     information {
       countries {
         id

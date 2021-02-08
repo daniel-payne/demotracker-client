@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Box from '@material-ui/core/Box'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 
+import LockIcon from '@material-ui/icons/Lock'
 import LockOpenIcon from '@material-ui/icons/LockOpen'
 import SearchIcon from '@material-ui/icons/Search'
 
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 const Spacer = () => <div style={{ flexGrow: 1 }}></div>
 
 const PageNavigation = (props) => {
-  const { show, overlay, country, state, city } = props
+  const { viewer, show, overlay, country, state, city } = props
 
   const setLocation = useLocation()[1]
   const classes = useStyles()
@@ -56,6 +57,8 @@ const PageNavigation = (props) => {
 
   const isNoneFocused = overlay === 'NONE' || overlay === '' || overlay === undefined
   const isTerrorismFocused = overlay === 'TERRORISM'
+
+  const isAuthenticated = viewer && viewer.role && viewer.role === 'AUTHENTICATED'
 
   const handleClickWorld = () => {
     setLocation({ nextPath: `/world` })
@@ -90,16 +93,6 @@ const PageNavigation = (props) => {
     setLoginOpen(false)
   }
 
-  const LOGIN = gql`
-    mutation LOGIN {
-      login(username: "daniel.payne@keldan.co.uk", password: "hellorain") {
-        id
-        role
-        session
-      }
-    }
-  `
-
   const LOGOUT = gql`
     mutation LOGOUT {
       logout {
@@ -110,20 +103,9 @@ const PageNavigation = (props) => {
     }
   `
 
-  // const USER = gql`
-  //   query USER {
-  //     viewer {
-  //       id
-  //       role
-  //     }
-  //   }
-  // `
-
   const client = useApolloClient()
 
-  const handleClickConnect = async () => {
-    // await client.mutate({ mutation: LOGIN }).then((result) => console.log(result))
-    // await client.resetStore()
+  const handleClickCShowLogin = async () => {
     setLoginOpen(true)
   }
 
@@ -193,9 +175,15 @@ const PageNavigation = (props) => {
         </ButtonGroup>
         {/* <Button onClick={handleClickConnect}>Login</Button>
         <Button onClick={handleClickDisconnect}>Logout</Button> */}
-        <IconButton edge="end" color="inherit" aria-label="menu" onClick={handleClickConnect}>
-          <LockOpenIcon />
-        </IconButton>
+        {isAuthenticated ? (
+          <IconButton edge="end" aria-label="menu" onClick={handleClickDisconnect}>
+            <LockOpenIcon />
+          </IconButton>
+        ) : (
+          <IconButton edge="end" color="inherit" aria-label="menu" onClick={handleClickCShowLogin}>
+            <LockIcon />
+          </IconButton>
+        )}
       </Toolbar>
       <PlaceModal open={isSearchOpen} onClose={handleSearchClose} />
       <LoginModal open={isLoginOpen} onClose={handleLoginClose} />
