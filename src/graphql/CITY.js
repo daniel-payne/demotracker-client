@@ -20,6 +20,21 @@ const CITY = gql`
 
         outline
 
+        states {
+          id
+          name
+          hascCode
+
+          outline
+        }
+
+        cities {
+          id
+          name
+
+          outline
+        }
+
         city(id: $cityId) {
           id
           name

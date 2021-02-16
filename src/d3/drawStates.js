@@ -61,7 +61,7 @@ const drawStates = (svg, path, states, selectedState, onSelection) => {
       .selectAll('path')
       .attr('opacity', function (d) {
         if (selectedState.id !== d.properties.id) {
-          return 0.25
+          return 0.65
         }
         return 1.0
       })

@@ -3,7 +3,15 @@ import React, { useState, useRef, useEffect } from 'react'
 import renderGlobe from 'd3/renderGlobe'
 
 const Projection3D = (props) => {
-  const { selectedCountry } = props
+  const {
+    countries,
+    markers,
+    selectedCountry,
+    selectedState,
+    selectedCity,
+    onSelection,
+    smallMarkers,
+  } = props
 
   const targetSVG = useRef(null)
 
@@ -27,9 +35,15 @@ const Projection3D = (props) => {
       targetSVG: targetSVG.current,
       height,
       width,
+      onSelection,
+      countries,
+      markers,
       states,
       cities,
-      ...props,
+      selectedCountry,
+      selectedState,
+      selectedCity,
+      smallMarkers,
     })
 
     return () => {

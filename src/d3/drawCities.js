@@ -63,7 +63,7 @@ const drawCities = (svg, path, cities, selectedCity, onSelection) => {
         if (selectedCity.id !== d.properties.id) {
           return 0.15
         }
-        return 0.25
+        return 1.0
       })
   }
 }
