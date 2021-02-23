@@ -2,8 +2,8 @@ import React from 'react'
 
 import CountryOverview from 'components/country/CountryOverview'
 
-import extractMinMax from 'calculate/extractMinMax'
-import buildColorScale from 'calculate/buildColorScale'
+import extractMinMax from 'utils/extractMinMax'
+import buildColorScale from 'utils/buildColorScale'
 
 const WorldData = (props) => {
   const { countries } = props

@@ -25,6 +25,7 @@ const renderGlobe = ({
   height,
   width,
   onSelection,
+  onInform,
   countries,
   states,
   cities,
@@ -58,10 +59,10 @@ const renderGlobe = ({
   drawGlobe(svg, path)
   drawGraticule(svg, path)
 
-  drawCountries(svg, path, countries, selectedCountry, onSelection)
+  drawCountries(svg, path, countries, selectedCountry, onSelection, onInform)
 
-  drawStates(svg, path, states, selectedState, onSelection)
-  drawCities(svg, path, cities, selectedCity, onSelection)
+  drawStates(svg, path, states, selectedState, onSelection, onInform)
+  drawCities(svg, path, cities, selectedCity, onSelection, onInform)
 
   drawMarkers(svg, path, markers, smallMarkers)
 

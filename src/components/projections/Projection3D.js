@@ -10,7 +10,9 @@ const Projection3D = (props) => {
     selectedState,
     selectedCity,
     onSelection,
+    onInform,
     smallMarkers,
+    enableRotation,
   } = props
 
   const targetSVG = useRef(null)
@@ -36,6 +38,7 @@ const Projection3D = (props) => {
       height,
       width,
       onSelection,
+      onInform,
       countries,
       markers,
       states,
@@ -44,6 +47,7 @@ const Projection3D = (props) => {
       selectedState,
       selectedCity,
       smallMarkers,
+      enableRotation,
     })
 
     return () => {
@@ -63,6 +67,8 @@ const Projection3D = (props) => {
 
       <g id="map-display-markers" />
       <g id="map-display-events" />
+
+      <text id="map-display-info" x="20" y="35" fill="SaddleBrown" font-size="large"></text>
     </svg>
   )
 }

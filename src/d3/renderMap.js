@@ -23,6 +23,7 @@ const renderMap = ({
   height,
   width,
   onSelection,
+  onInform,
   countries,
   states,
   cities,
@@ -52,9 +53,9 @@ const renderMap = ({
   drawGlobe(svg, path)
   drawGraticule(svg, path)
 
-  drawCountries(svg, path, countries, selectedCountry, onSelection)
-  drawStates(svg, path, states, selectedState, onSelection)
-  drawCities(svg, path, cities, selectedCity, onSelection)
+  drawCountries(svg, path, countries, selectedCountry, onSelection, onInform)
+  drawStates(svg, path, states, selectedState, onSelection, onInform)
+  drawCities(svg, path, cities, selectedCity, onSelection, onInform)
 
   drawMarkers(svg, path, markers, smallMarkers)
 

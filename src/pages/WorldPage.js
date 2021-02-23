@@ -48,6 +48,11 @@ const WorldPage = () => {
 
   let display
 
+  const handleRotation = () => {
+    const nextRotation = !enableRotation
+    setRotation(nextRotation)
+  }
+
   if (show === 'MAP') {
     display = <WorldMap countries={countries} markers={globalMarkers} />
   } else if (show === 'GLOBE') {
@@ -58,18 +63,13 @@ const WorldPage = () => {
     display = <WorldData countries={countries} />
   }
 
-  const handleRotation = () => {
-    const nextRotation = !enableRotation
-    setRotation(nextRotation)
-  }
-
   const overflowClass = show === 'MAP' || show === 'GLOBE' ? 'overflow-hidden' : ''
 
   return (
     <Box className={'WorldPage full-page ' + overflowClass}>
       {show === 'GLOBE' && (
         <div style={{ position: 'absolute', bottom: 24, right: 24 }}>
-          <Button onClick={handleRotation}>Rotate {enableRotation}</Button>
+          <Button onClick={handleRotation}>Rotate</Button>
         </div>
       )}
       <PageNavigation show={show} overlay={overlay} viewer={viewer} />

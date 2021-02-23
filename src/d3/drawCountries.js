@@ -1,9 +1,21 @@
 import * as d3 from 'd3'
 
-const drawCountries = (svg, path, countries, selectedCountry, onSelection) => {
+import debounce from 'utils/debounce'
+
+let info
+
+function showInfo() {
+  d3.select('#map-display-info').text(info)
+}
+
+const delayedShowInfo = debounce(showInfo, 250)
+
+const drawCountries = (svg, path, countries, selectedCountry, onSelection, onInform) => {
   if (!countries) {
     return
   }
+
+  // const debounceHandleInform = debounce(handleInform, 500)
 
   const data = countries
     .filter((country) => country.outline)
@@ -11,7 +23,7 @@ const drawCountries = (svg, path, countries, selectedCountry, onSelection) => {
       const geoJson = JSON.parse(country.outline)
 
       geoJson.properties = {
-        name: country.countryName,
+        name: country.name,
         id: country.id,
         type: 'COUNTRY',
       }
@@ -41,11 +53,17 @@ const drawCountries = (svg, path, countries, selectedCountry, onSelection) => {
     .selectAll('path')
     .on('mouseover', function (event, d) {
       if (!selectedCountry || selectedCountry.id !== d.properties.id) {
-        d3.select(this).style('fill', 'DarkSeaGreen')
+        d3.select(this).transition().delay(250).style('fill', 'DarkSeaGreen')
+
+        info = d.properties.name
+        delayedShowInfo()
       }
     })
     .on('mouseout', function (event, d) {
-      d3.select(this).style('fill', 'gainsboro')
+      d3.select(this).transition().style('fill', 'gainsboro')
+
+      info = null
+      showInfo()
     })
     .on('dblclick', function (event, d) {
       // d3.event.stopPropagation()

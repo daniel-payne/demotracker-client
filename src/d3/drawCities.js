@@ -1,5 +1,15 @@
 import * as d3 from 'd3'
 
+import debounce from 'utils/debounce'
+
+let info
+
+function showInfo() {
+  d3.select('#map-display-info').text(info)
+}
+
+const delayedShowInfo = debounce(showInfo, 250)
+
 const drawCities = (svg, path, cities, selectedCity, onSelection) => {
   if (!cities) {
     return
@@ -41,11 +51,17 @@ const drawCities = (svg, path, cities, selectedCity, onSelection) => {
     .selectAll('path')
     .on('mouseover', function (event, d) {
       if (!selectedCity || selectedCity.id !== d.properties.id) {
-        d3.select(this).style('fill', 'SaddleBrown')
+        d3.select(this).transition().delay(250).style('fill', 'SaddleBrown')
+
+        info = d.properties.name
+        delayedShowInfo()
       }
     })
     .on('mouseout', function (event, d) {
-      d3.select(this).style('fill', 'Peru')
+      d3.select(this).transition().style('fill', 'Peru')
+
+      info = null
+      showInfo()
     })
     // .attr('pointer-events', 'none')
     .on('dblclick', function (event, d) {

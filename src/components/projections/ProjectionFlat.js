@@ -10,6 +10,7 @@ const ProjectionFlat = (props) => {
     selectedState,
     selectedCity,
     onSelection,
+    onInform,
     smallMarkers,
   } = props
 
@@ -36,6 +37,7 @@ const ProjectionFlat = (props) => {
       height,
       width,
       onSelection,
+      onInform,
       countries,
       markers,
       states,
@@ -57,6 +59,8 @@ const ProjectionFlat = (props) => {
 
       <g id="map-display-markers" />
       <g id="map-display-events" />
+
+      <text id="map-display-info" x="20" y="35" fill="SaddleBrown" font-size="large"></text>
     </svg>
   )
 }

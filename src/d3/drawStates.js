@@ -1,5 +1,15 @@
 import * as d3 from 'd3'
 
+import debounce from 'utils/debounce'
+
+let info
+
+function showInfo() {
+  d3.select('#map-display-info').text(info)
+}
+
+const delayedShowInfo = debounce(showInfo, 250)
+
 const drawStates = (svg, path, states, selectedState, onSelection) => {
   if (!states) {
     return
@@ -12,7 +22,7 @@ const drawStates = (svg, path, states, selectedState, onSelection) => {
       const geoJson = JSON.parse(state.outline)
 
       geoJson.properties = {
-        name: state.stateName,
+        name: state.name,
         id: state.id,
         type: 'STATE',
       }
@@ -41,11 +51,17 @@ const drawStates = (svg, path, states, selectedState, onSelection) => {
     .selectAll('path')
     .on('mouseover', function (event, d) {
       if (!selectedState || selectedState.id !== d.properties.id) {
-        d3.select(this).style('fill', 'DarkSeaGreen')
+        d3.select(this).transition().delay(250).style('fill', 'DarkSeaGreen')
+
+        info = d.properties.name
+        delayedShowInfo()
       }
     })
     .on('mouseout', function (event, d) {
-      d3.select(this).style('fill', 'gainsboro')
+      d3.select(this).transition().style('fill', 'gainsboro')
+
+      info = null
+      showInfo()
     })
     .on('dblclick', function (event, d) {
       // d3.event.stopPropagation()

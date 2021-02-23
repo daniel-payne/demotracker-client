@@ -6,8 +6,8 @@ import Typography from '@material-ui/core/Typography'
 import StateOverview from 'components/state/StateOverview'
 import CityOverview from 'components/city/CityOverview'
 
-import extractMinMax from 'calculate/extractMinMax'
-import buildColorScale from 'calculate/buildColorScale'
+import extractMinMax from 'utils/extractMinMax'
+import buildColorScale from 'utils/buildColorScale'
 
 const CountryData = (props) => {
   const { country, states, cities } = props
