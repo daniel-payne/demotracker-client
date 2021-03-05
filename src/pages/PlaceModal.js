@@ -31,13 +31,15 @@ const useStyles = makeStyles((theme) => ({
 
 const PLACES = gql`
   query places($match: String!) {
-    places(match: $match) {
-      id
-      name
-      countryName
-      countryId
-      displayOrder
-      type
+    information {
+      places(match: $match) {
+        id
+        name
+        countryName
+        countryId
+        displayOrder
+        type
+      }
     }
   }
 `
@@ -80,7 +82,8 @@ const PlaceModal = (props) => {
     setLocation({ nextPath })
   }
 
-  const { places } = data || {}
+  const { information } = data || {}
+  const { places } = information || {}
 
   return (
     <div>
@@ -109,14 +112,24 @@ const PlaceModal = (props) => {
         </Box>
         {places && (
           <List>
-            {places.map((place) => (
-              <React.Fragment>
-                <ListItem button onClick={() => handleChoice(place)}>
-                  <ListItemText primary={place.name} secondary={place.countryName} />
-                </ListItem>
-                <Divider />
-              </React.Fragment>
-            ))}
+            {places.map((place) => {
+              const name = place.name
+              const type = place.type ? place.type.toLowerCase() : ''
+              const countryName = place.countryName ? place.countryName : ''
+
+              const capitalizedType = type.charAt(0).toUpperCase() + type.slice(1)
+
+              const description = `${capitalizedType}, ${countryName}`
+
+              return (
+                <React.Fragment>
+                  <ListItem button onClick={() => handleChoice(place)}>
+                    <ListItemText primary={name} secondary={description} />
+                  </ListItem>
+                  <Divider />
+                </React.Fragment>
+              )
+            })}
           </List>
         )}
       </Dialog>
